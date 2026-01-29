@@ -1,0 +1,84 @@
+name: counter
+version: 0.1.0
+description: |
+  Simple counter for testing persistent mode.
+  Maintains state between calls.
+
+capabilities:
+  - maintain counter state
+  - increment/decrement
+  - persistent mode testing
+
+runtime:
+  python: "3.11"
+  mode: persistent
+  entrypoint: main.py
+
+rpc:
+  methods:
+    get:
+      description: "Get the current counter value"
+      input:
+        type: object
+        properties: {}
+      output:
+        type: object
+        properties:
+          value:
+            type: integer
+
+    increment:
+      description: "Increment the counter by n (default 1)"
+      input:
+        type: object
+        properties:
+          n:
+            type: integer
+            description: "Amount to increment"
+            default: 1
+      output:
+        type: object
+        properties:
+          value:
+            type: integer
+
+    decrement:
+      description: "Decrement the counter by n (default 1)"
+      input:
+        type: object
+        properties:
+          n:
+            type: integer
+            description: "Amount to decrement"
+            default: 1
+      output:
+        type: object
+        properties:
+          value:
+            type: integer
+
+    reset:
+      description: "Reset the counter to 0 (or specified value)"
+      input:
+        type: object
+        properties:
+          value:
+            type: integer
+            description: "Value to reset to"
+            default: 0
+      output:
+        type: object
+        properties:
+          value:
+            type: integer
+
+    health:
+      description: "Health check"
+      input:
+        type: object
+        properties: {}
+      output:
+        type: object
+        properties:
+          status:
+            type: string
