@@ -14,6 +14,11 @@ runtime:
   mode: persistent
   entrypoint: main.py
 
+health:
+  method: health
+  interval: 10
+  failure_threshold: 3
+
 rpc:
   methods:
     get:
